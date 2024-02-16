@@ -89,7 +89,12 @@
       // message is Buffer
       let str = message.toString();
       console.log(str);
-      queryByISBN(str);
+        let jsonString = JSON.stringify({code:str});
+        if (FileMaker) {
+            FileMaker.PerformScript("Find asset", jsonString);
+          }
+
+      // queryByISBN(str);
     })
   }
 
