@@ -98,25 +98,29 @@
   }
 
   function queryByISBN(isbn){
-    let URL = 'https://openlibrary.org/isbn/'+isbn+'.json';
-    let xhr = new XMLHttpRequest();
-    xhr.open('GET', URL);
-    xhr.onreadystatechange = function(){
-      if(xhr.readyState === 4){
-        try {
-          let obj = JSON.parse(xhr.responseText);
-          let title = obj["title"];
-          console.log(title);
-          let jsonString = JSON.stringify({title:title,isbn:isbn});
-          if (FileMaker) {
-            FileMaker.PerformScript("Insert Book", jsonString);
+    let jsonString = JSON.stringify({code:isbn});
+       if (FileMaker) {
+            FileMaker.PerformScript("Find asset", jsonString);
           }
-        } catch (error) {
-          console.log(error);
-        }
-      }
-    }
-    xhr.send();
+    // let URL = 'https://openlibrary.org/isbn/'+isbn+'.json';
+    // let xhr = new XMLHttpRequest();
+    // xhr.open('GET', URL);
+    // xhr.onreadystatechange = function(){
+    //   if(xhr.readyState === 4){
+    //     try {
+    //       let obj = JSON.parse(xhr.responseText);
+    //       let title = obj["title"];
+    //       console.log(title);
+    //       let jsonString = JSON.stringify({title:title,isbn:isbn});
+    //       if (FileMaker) {
+    //         FileMaker.PerformScript("Insert Book", jsonString);
+    //       }
+    //     } catch (error) {
+    //       console.log(error);
+    //     }
+    //   }
+    // }
+    // xhr.send();
   }
   </script>
 </body>
